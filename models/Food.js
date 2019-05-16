@@ -14,4 +14,4 @@ const FoodSchema = new mongoose.Schema({
   }]
 });
 
-module.exports = mongoose.model('carbohydrate-counting-api.foods', FoodSchema);
+module.exports = mongoose.model('foods', FoodSchema);

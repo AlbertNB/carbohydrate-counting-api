@@ -44,17 +44,14 @@ module.exports.getAll = (event, context, callback) => {
 
   connectToDatabase()
     .then(() => {
-      console.log("01")
       Food.find({})
         .then(foods => {
-          console.log("02", foods)
           callback(null, {
           statusCode: 200,
           body: JSON.stringify(foods)
         })
       })
         .catch(err => {
-          console.log("03")
           callback(null, {
           statusCode: err.statusCode || 500,
           headers: { 'Content-Type': 'text/plain' },
