@@ -1,0 +1,69 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: carbohydrate-counting-api # NOTE: update this with your service name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  profile: rest-api-profile
+  runtime: nodejs8.10
+  memorySize: 128 # set the maximum memory of the Lambdas in Megabytes
+  timeout: 10 # the timeout is 10 seconds (default is 6 seconds)
+  stage: dev # setting the env stage to dev, this will be visible in the routes
+  region: us-east-1
+  environment:
+    ${file(./dev.env.yml)}
+
+functions: # add 4 functions for CRUD
+  create:
+    handler: handler.create # point to exported create function in handler.js
+    events:
+      - http:
+          path: foods # path will be domain.name.com/dev/foods
+          method: post
+          cors: true
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: foods/{id} # path will be domain.name.com/dev/foods/1
+          method: get
+          cors: true
+  getAll:
+    handler: handler.getAll # path will be domain.name.com/dev/foods
+    events:
+     - http:
+         path: foods
+         method: get
+         cors: true
+  update:
+    handler: handler.update # path will be domain.name.com/dev/foods/1
+    events:
+     - http:
+         path: foods/{id}
+         method: put
+         cors: true
+  delete:
+    handler: handler.delete
+    events:
+     - http:
+         path: foods/{id} # path will be domain.name.com/dev/foods/1
+         method: delete
+         cors: true
+
+plugins:
+- serverless-offline # adding the plugin to be able to run the offline emulation

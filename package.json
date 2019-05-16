@@ -1,0 +1,20 @@
+{
+  "name": "carbohydrate-counting-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "mongoose": "^5.5.8"
+  },
+  "devDependencies": {
+    "serverless-offline": "4.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline": "sls offline start --skipCacheInvalidation",
+    "debug": "export SLS_DEBUG=* && node --inspect /usr/local/bin/serverless offline start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
